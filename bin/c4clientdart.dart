@@ -5,10 +5,12 @@ import 'dart:io';
 
 void main(List<String> arguments) async {
   print('Welcome to Connect 4!');
+  print('Type in desired server!');
   var defaultUrl = Uri.parse(
       "http://www.cs.utep.edu//cheon/cs3360/project/c4"); //Does not work for now
-  var localUrl =
-      "https://cssrvlab01.utep.edu/Classes/cs3360/laescapita/c4service/src";
+  // var localUrl =
+  //     "https://cssrvlab01.utep.edu/Classes/cs3360/laescapita/c4service/src";
+  dynamic localUrl = stdin.readLineSync();
   var ui = uicontrol();
   var web = webcontrol();
   var infoList = [];
@@ -30,8 +32,8 @@ void main(List<String> arguments) async {
   }
 
   print('Choose your difficulty! Enter the corresponding number:');
-  //dynamic strategySelection = stdin.readLineSync();
-  var chosenStrategy = infoList[1];
+  dynamic strategySelection = stdin.readLineSync();
+  var chosenStrategy = infoList[int.parse(strategySelection)];
   // try {
   //   var chosenStrategy = infoList[strategySelection];
   // } catch (e) {
