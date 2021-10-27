@@ -15,8 +15,12 @@ class Controller {
     var strategy = ui.promptForStrategy(info.strategies);
     print("Creating new game...");
     var newGame = await web.getNew(url, strategy);
-    print('response: ' + newGame.response.toString());
-    print('strategy: ' + newGame.strategy);
-    print('pid: ' + newGame.pid);
+    // print('response: ' + newGame.response.toString());
+    // print('strategy: ' + newGame.strategy);
+    // print('pid: ' + newGame.pid);
+    var board = Board(info.width, info.height);
+    //LOOP UNTIL WIN
+    ui.setBoard(board);
+    ui.promptMove();
   }
 }
