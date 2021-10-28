@@ -37,14 +37,19 @@ class UiControl {
 
   promptMove() {
     int? maxWidth = board?.width;
-    print('Choose a column! [1 - $maxWidth]');
-    dynamic col = int?.parse(stdin.readLineSync()!);
-    if (col > maxWidth || col < 1) {
-      print('Invalid Selection: $col');
-    } else {
-      print('Valid Selection: $col');
-      //CALL WEB TO MAKE A MOVE
+    bool loop = true;
+    dynamic col;
+    while (loop) {
+      print('Choose a column! [1 - $maxWidth]');
+      col = int?.parse(stdin.readLineSync()!);
+      if (col > maxWidth || col < 1) {
+        print('Invalid Selection: $col');
+      } else {
+        print('Valid Selection: $col');
+        loop = false;
+      }
     }
+    return col;
   }
 }
 

@@ -39,6 +39,17 @@ class WebControl {
       print(e);
     }
   }
+
+  getMove(dynamic url, dynamic pid, int columnChosen) async {
+    Uri newUrl = Uri.parse(url + '/play?pid=$pid&move=$columnChosen');
+    try {
+      var response = await http.get(newUrl);
+      Map parsedMove = parse.parseInfo(response);
+      return parsedMove; //CREATE MOVE CLASS AND MOLD IT TO THAT
+    } catch (e) {
+      print(e);
+    }
+  }
 }
 
 class Info {
