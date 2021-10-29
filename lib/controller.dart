@@ -21,9 +21,19 @@ class Controller {
     var board = Board(info.width, info.height);
     //LOOP UNTIL WIN
     ui.setBoard(board);
-    var columnChosen = ui.promptMove();
-    print("Making a move...");
-    var move = await web.getMove(url, game.pid, columnChosen);
-    print(move.ack_move.isWin);
+    var anyWon = false;
+    do {
+      var columnChosen = ui.promptMove();
+      print("Making a move...");
+      var move = await web.getMove(url, game.pid, columnChosen);
+      if (move.ack_move.isWin) {
+        anyWon = move.ack_move.isWin;
+      }
+      if (move.move.isWin) {
+        anyWon = move.move.isWin;
+      }
+      ui.promptBoard(
+          move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
+    } while (anyWon == false);
   }
 }

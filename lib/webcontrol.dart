@@ -65,6 +65,7 @@ class Info {
   final width;
   final height;
   final strategies;
+
   Info(this.width, this.height, this.strategies);
 }
 
@@ -72,6 +73,7 @@ class NewGame {
   final response;
   final strategy;
   final pid;
+
   NewGame(this.response, this.strategy, this.pid);
 }
 
@@ -79,6 +81,7 @@ class Move {
   final response;
   final PlayerMove ack_move;
   final PlayerMove move;
+
   Move(this.response, this.ack_move, this.move);
 }
 
@@ -88,5 +91,6 @@ class PlayerMove {
   final isWin;
   final isDraw;
   final row;
+
   PlayerMove(this.x, this.y, this.isWin, this.isDraw, this.row);
 }

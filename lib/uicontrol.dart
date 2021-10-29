@@ -51,10 +51,22 @@ class UiControl {
     }
     return col;
   }
+
+  promptBoard(playerX, playerY, cpuX, cpuY) {
+    print("Board will show here");
+    board?.showBoard(playerX, playerY, cpuX, cpuY);
+  }
 }
 
 class Board {
   final int width;
   final int height;
+  //List boardList = List.generate(height, (i) => List(width), growable: false);
+
   Board(this.width, this.height);
+
+  showBoard(playerX, playerY, cpuX, cpuY) {
+    print("Player placed Chip in column $playerX and landed in row $playerY");
+    print("CPU placed Chip in column $cpuX and landed in row $cpuY");
+  }
 }
