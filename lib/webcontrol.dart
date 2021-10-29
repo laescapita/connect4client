@@ -45,7 +45,16 @@ class WebControl {
     try {
       var response = await http.get(newUrl);
       Map parsedMove = parse.parseInfo(response);
-      return parsedMove; //CREATE MOVE CLASS AND MOLD IT TO THAT
+      var responseBool = parsedMove['response'] as bool;
+      var ack_move = parsedMove['ack_move'] as Map;
+      var playerMove = new PlayerMove(ack_move["x"], ack_move["y"],
+          ack_move["isWin"], ack_move["isDraw"], ack_move["row"]);
+      var move = parsedMove['move'] as Map;
+      var cpuMove = new PlayerMove(
+          move["x"], move["y"], move["isWin"], move["isDraw"], move["row"]);
+      var newMove = new Move(responseBool, playerMove, cpuMove);
+
+      return newMove; //CREATE MOVE CLASS AND MOLD IT TO THAT
     } catch (e) {
       print(e);
     }
@@ -64,4 +73,20 @@ class NewGame {
   final strategy;
   final pid;
   NewGame(this.response, this.strategy, this.pid);
+}
+
+class Move {
+  final response;
+  final PlayerMove ack_move;
+  final PlayerMove move;
+  Move(this.response, this.ack_move, this.move);
+}
+
+class PlayerMove {
+  final x;
+  final y;
+  final isWin;
+  final isDraw;
+  final row;
+  PlayerMove(this.x, this.y, this.isWin, this.isDraw, this.row);
 }

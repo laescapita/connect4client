@@ -24,6 +24,6 @@ class Controller {
     var columnChosen = ui.promptMove();
     print("Making a move...");
     var move = await web.getMove(url, game.pid, columnChosen);
-    print(move);
+    print(move.ack_move.isWin);
   }
 }
