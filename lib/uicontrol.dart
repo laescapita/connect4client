@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 import 'dart:io';
 import 'dart:convert';
 import 'package:c4clientdart/parsecontrol.dart';
@@ -56,17 +58,28 @@ class UiControl {
     print("Board will show here");
     board?.showBoard(playerX, playerY, cpuX, cpuY);
   }
+
+  promptWin(move) {
+    if (move.ack_move.isWin) {
+      var winningRow = move.ack_move.row;
+      print("Player Win at: $winningRow");
+    }
+    if (move.move.isWin) {
+      var winningRow = move.move.row;
+      print("CPU Win at: $winningRow");
+    }
+  }
 }
 
 class Board {
   final int width;
   final int height;
-  //List boardList = List.generate(height, (i) => List(width), growable: false);
-
   Board(this.width, this.height);
 
   showBoard(playerX, playerY, cpuX, cpuY) {
     print("Player placed Chip in column $playerX and landed in row $playerY");
     print("CPU placed Chip in column $cpuX and landed in row $cpuY");
   }
+
+  //addChips(playerX, playerY, cpuX, cpuY) {}
 }
