@@ -41,6 +41,7 @@ class WebControl {
   }
 
   getMove(dynamic url, dynamic pid, int columnChosen) async {
+    print(url + '/play?pid=$pid&move=$columnChosen');
     Uri newUrl = Uri.parse(url + '/play?pid=$pid&move=$columnChosen');
     try {
       var response = await http.get(newUrl);

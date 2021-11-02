@@ -74,12 +74,17 @@ class UiControl {
 class Board {
   final int width;
   final int height;
+  var player = Player("O");
+  var cpu = Player("X");
   Board(this.width, this.height);
 
   showBoard(playerX, playerY, cpuX, cpuY) {
     print("Player placed Chip in column $playerX and landed in row $playerY");
     print("CPU placed Chip in column $cpuX and landed in row $cpuY");
   }
+}
 
-  //addChips(playerX, playerY, cpuX, cpuY) {}
+class Player {
+  final String token;
+  Player(this.token);
 }
