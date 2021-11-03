@@ -16,6 +16,7 @@ class UiControl {
     dynamic defaultUrl = DEFAULT_URL;
     print('Type in desired server!');
     //Type in: "https://cssrvlab01.utep.edu/Classes/cs3360/laescapita/c4service/src";
+    //Or: "http://www.cs.utep.edu//cheon/cs3360/project/c4"
     dynamic localUrl = stdin.readLineSync();
     if (localUrl == null) {
       localUrl = defaultUrl;
@@ -30,6 +31,7 @@ class UiControl {
     print('Choose Strategy!');
     dynamic num = stdin.readLineSync();
     var chosenStrategy = strategyList[int.parse(num)];
+    print(chosenStrategy);
     return chosenStrategy;
   }
 
@@ -77,10 +79,39 @@ class Board {
   var player = Player("O");
   var cpu = Player("X");
   Board(this.width, this.height);
+  List _board = List<List<int>>.generate(
+      6, (i) => List<int>.generate(7, (i) => 0, growable: false),
+      growable: false);
 
   showBoard(playerX, playerY, cpuX, cpuY) {
     print("Player placed Chip in column $playerX and landed in row $playerY");
     print("CPU placed Chip in column $cpuX and landed in row $cpuY");
+    for (int i = 0; i < 6; i++) {
+      for (int j = 0; j < 7; j++) {
+        if (_board[i][j] == 0) {
+          stdout.write('. ');
+        } // Empty slot.
+        else if (_board[i][j] == 1) {
+          stdout.write('O ');
+        } // User slot.
+        else {
+          stdout.write('X ');
+        } // Computer slot.
+      }
+      print('');
+    }
+    for (var i = 1; i <= 7; i++) {
+      stdout.write("$i ");
+    }
+  }
+
+  insertTokens(int move, int player) {
+    for (int yCoordinate = 5; yCoordinate > -1; yCoordinate--) {
+      if (_board[yCoordinate][move] == 0) {
+        _board[yCoordinate][move] = player;
+        return;
+      }
+    }
   }
 }
 

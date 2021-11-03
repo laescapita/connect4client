@@ -25,9 +25,13 @@ class Controller {
     var cpuWon = false;
     var move;
     do {
-      var columnChosen = ui.promptMove();
+      var columnChosen = ui.promptMove() - 1;
       print("Making a move...");
       move = await web.getMove(url, game.pid, columnChosen);
+
+      board.insertTokens(int.parse(move.ack_move.x), 1);
+      board.insertTokens(move.move.x, 2);
+
       if (move.ack_move.isWin) {
         playerWon = move.ack_move.isWin;
       }
