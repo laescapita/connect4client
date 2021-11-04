@@ -33,6 +33,10 @@ class Controller {
         print("Making a move...");
         move = await web.getMove(url, game.pid, columnChosen);
 
+        if (ui.board?.isBoardFull()) {
+          break;
+        }
+
         if (move.ack_move.isWin) {
           playerWon = move.ack_move.isWin;
           board.insertTokens(int.parse(move.ack_move.x), 1);
@@ -64,6 +68,10 @@ class Controller {
         var columnChosen = ui.promptMove();
         print("Making a move...");
         move = await web.getMove(url, game.pid, columnChosen);
+
+        if (ui.board?.isBoardFull()) {
+          break;
+        }
 
         if (ui.board?.isBoardFull()) {
           playerWon = true;
