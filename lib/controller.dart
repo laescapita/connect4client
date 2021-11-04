@@ -25,18 +25,33 @@ class Controller {
     var cpuWon = false;
     var move;
     do {
-      var columnChosen = ui.promptMove() - 1;
+      var columnChosen = ui.promptMove();
       print("Making a move...");
       move = await web.getMove(url, game.pid, columnChosen);
 
-      board.insertTokens(int.parse(move.ack_move.x), 1);
-      board.insertTokens(move.move.x, 2);
+      if (ui.board?.isBoardFull()) {
+        playerWon = true;
+        cpuWon = true;
+        break;
+      }
 
       if (move.ack_move.isWin) {
         playerWon = move.ack_move.isWin;
+        board.insertTokens(int.parse(move.ack_move.x), 1);
+
+        ui.promptBoard(
+            move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
+        break;
       }
       if (move.move.isWin) {
         cpuWon = move.move.isWin;
+        board.insertTokens(move.move.x, 2);
+        ui.promptBoard(
+            move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
+        break;
+      } else {
+        board.insertTokens(int.parse(move.ack_move.x), 1);
+        board.insertTokens(move.move.x, 2);
       }
       ui.promptBoard(
           move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);

@@ -65,10 +65,11 @@ class UiControl {
     if (move.ack_move.isWin) {
       var winningRow = move.ack_move.row;
       print("Player Win at: $winningRow");
-    }
-    if (move.move.isWin) {
+    } else if (move.move.isWin) {
       var winningRow = move.move.row;
       print("CPU Win at: $winningRow");
+    } else {
+      print("Game Ended in A Tie");
     }
   }
 }
@@ -103,6 +104,17 @@ class Board {
     for (var i = 1; i <= 7; i++) {
       stdout.write("$i ");
     }
+  }
+
+  isBoardFull() {
+    for (int i = 0; i < 6; i++) {
+      for (int j = 0; j < 7; j++) {
+        if (_board[i][j] == 0) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   insertTokens(int move, int player) {
