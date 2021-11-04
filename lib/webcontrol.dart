@@ -4,8 +4,8 @@ import 'package:c4clientdart/parsecontrol.dart';
 
 class WebControl {
   //Anything to do with connecting to a server
-  dynamic DEFAULT_URL = Uri.parse(
-      "http://www.cs.utep.edu//cheon/cs3360/project/c4"); //Does not work for now
+  dynamic DEFAULT_URL =
+      Uri.parse("http://cheon.atwebpages.com/c4"); //Does not work for now
   var parse = ParseControl();
 
   getInfo(dynamic url) async {

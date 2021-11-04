@@ -16,7 +16,6 @@ class UiControl {
     dynamic defaultUrl = DEFAULT_URL;
     print('Type in desired server!');
     //Type in: "https://cssrvlab01.utep.edu/Classes/cs3360/laescapita/c4service/src";
-    //Or: "http://www.cs.utep.edu//cheon/cs3360/project/c4"
     dynamic localUrl = stdin.readLineSync();
     if (localUrl == null) {
       localUrl = defaultUrl;
