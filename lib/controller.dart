@@ -24,39 +24,76 @@ class Controller {
     var playerWon = false;
     var cpuWon = false;
     var move;
-    do {
-      var columnChosen = ui.promptMove();
-      print("Making a move...");
-      move = await web.getMove(url, game.pid, columnChosen);
+    print("cheat mode activated?");
+    dynamic userChoice = stdin.readLineSync();
 
-      if (ui.board?.isBoardFull()) {
-        playerWon = true;
-        cpuWon = true;
-        break;
-      }
+    if (userChoice == "yes") {
+      do {
+        var columnChosen = ui.promptMove();
+        print("Making a move...");
+        move = await web.getMove(url, game.pid, columnChosen);
 
-      if (move.ack_move.isWin) {
-        playerWon = move.ack_move.isWin;
-        board.insertTokens(int.parse(move.ack_move.x), 1);
+        if (move.ack_move.isWin) {
+          playerWon = move.ack_move.isWin;
+          board.insertTokens(int.parse(move.ack_move.x), 1);
 
+          ui.promptBoard(
+              move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
+          break;
+        }
+        if (move.move.isWin) {
+          cpuWon = move.move.isWin;
+          board.insertTokens(move.move.x, 2);
+          ui.promptBoard(
+              move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
+          break;
+        } else {
+          board.insertTokens(int.parse(move.ack_move.x), 1);
+          print("CPU old move" + move.move.x.toString());
+          print("New cpu move?");
+          var cpuNewMove = stdin.readLineSync();
+          board.insertTokens(int.parse(cpuNewMove!), 2);
+        }
         ui.promptBoard(
             move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
-        break;
-      }
-      if (move.move.isWin) {
-        cpuWon = move.move.isWin;
-        board.insertTokens(move.move.x, 2);
+      } while (playerWon == false && cpuWon == false);
+
+      ui.promptWin(move);
+    } else {
+      do {
+        var columnChosen = ui.promptMove();
+        print("Making a move...");
+        move = await web.getMove(url, game.pid, columnChosen);
+
+        if (ui.board?.isBoardFull()) {
+          playerWon = true;
+          cpuWon = true;
+          break;
+        }
+
+        if (move.ack_move.isWin) {
+          playerWon = move.ack_move.isWin;
+          board.insertTokens(int.parse(move.ack_move.x), 1);
+
+          ui.promptBoard(
+              move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
+          break;
+        }
+        if (move.move.isWin) {
+          cpuWon = move.move.isWin;
+          board.insertTokens(move.move.x, 2);
+          ui.promptBoard(
+              move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
+          break;
+        } else {
+          board.insertTokens(int.parse(move.ack_move.x), 1);
+          board.insertTokens(move.move.x, 2);
+        }
         ui.promptBoard(
             move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
-        break;
-      } else {
-        board.insertTokens(int.parse(move.ack_move.x), 1);
-        board.insertTokens(move.move.x, 2);
-      }
-      ui.promptBoard(
-          move.ack_move.x, move.ack_move.y, move.move.x, move.move.y);
-    } while (playerWon == false && cpuWon == false);
+      } while (playerWon == false && cpuWon == false);
 
-    ui.promptWin(move);
+      ui.promptWin(move);
+    }
   }
 }
