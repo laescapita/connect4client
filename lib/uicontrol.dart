@@ -123,11 +123,10 @@ class Board {
     return true;
   }
 
-  insertTokens(int move, int player) {
-    //Inserts token based on CPU or Player
-    for (int yCoordinate = 5; yCoordinate > -1; yCoordinate--) {
-      if (_board[yCoordinate][move] == 0) {
-        _board[yCoordinate][move] = player;
+  insertTokens(move, int player) {
+    for (int yposition = 5; yposition > -1; yposition--) {
+      if (_board[yposition][move] == 0) {
+        _board[yposition][move] = player;
         return;
       }
     }
