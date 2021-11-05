@@ -9,6 +9,7 @@ class WebControl {
   var parse = ParseControl();
 
   getInfo(dynamic url) async {
+    //Gets info from given server
     var response;
     var info;
     Uri infoUrl = Uri.parse(url + '/info');
@@ -26,6 +27,7 @@ class WebControl {
   }
 
   getNew(dynamic url, dynamic strategy) async {
+    //Creates new game from given server
     Uri newUrl = Uri.parse(url + '/new?strategy=$strategy');
     try {
       var response = await http.get(newUrl);
@@ -41,6 +43,7 @@ class WebControl {
   }
 
   getMove(dynamic url, dynamic pid, int columnChosen) async {
+    //Gets move from given server
     print(url + '/play?pid=$pid&move=$columnChosen');
     Uri newUrl = Uri.parse(url + '/play?pid=$pid&move=$columnChosen');
     try {
@@ -55,7 +58,7 @@ class WebControl {
           move["x"], move["y"], move["isWin"], move["isDraw"], move["row"]);
       var newMove = new Move(responseBool, playerMove, cpuMove);
 
-      return newMove; //CREATE MOVE CLASS AND MOLD IT TO THAT
+      return newMove;
     } catch (e) {
       print(e);
     }

@@ -13,6 +13,7 @@ class UiControl {
   }
 
   dynamic promptForServer(DEFAULT_URL) {
+    //Uses given server to connect to, if null uses default
     dynamic defaultUrl = DEFAULT_URL;
     print('Type in desired server!');
     //Type in: "https://cssrvlab01.utep.edu/Classes/cs3360/laescapita/c4service/src";
@@ -24,6 +25,7 @@ class UiControl {
   }
 
   promptForStrategy(strategyList) {
+    //Gives strategy list, and prompts user to choose
     for (int i = 0; i < strategyList.length; i++) {
       print("$i " + strategyList[i]);
     }
@@ -35,10 +37,12 @@ class UiControl {
   }
 
   setBoard(Board board) {
+    //sets board for local use
     this.board = board;
   }
 
   promptMove() {
+    //prompts user to choose column to place chip on
     int? maxWidth = board?.width;
     bool loop = true;
     dynamic col;
@@ -56,11 +60,13 @@ class UiControl {
   }
 
   promptBoard(playerX, playerY, cpuX, cpuY) {
+    //Shows board
     print("Board will show here");
     board?.showBoard(playerX, playerY, cpuX, cpuY);
   }
 
   promptWin(move) {
+    //If win, prompt who won
     if (move.ack_move.isWin) {
       var winningRow = move.ack_move.row;
       print("Player Win at: $winningRow");
@@ -84,6 +90,7 @@ class Board {
       growable: false);
 
   showBoard(playerX, playerY, cpuX, cpuY) {
+    //Uses local board inside class for UI purposes
     print("Player placed Chip in column $playerX and landed in row $playerY");
     print("CPU placed Chip in column $cpuX and landed in row $cpuY");
     for (int i = 0; i < 6; i++) {
@@ -117,6 +124,7 @@ class Board {
   }
 
   insertTokens(int move, int player) {
+    //Inserts token based on CPU or Player
     for (int yCoordinate = 5; yCoordinate > -1; yCoordinate--) {
       if (_board[yCoordinate][move] == 0) {
         _board[yCoordinate][move] = player;

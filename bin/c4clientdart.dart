@@ -4,5 +4,6 @@ import 'dart:io';
 
 void main(List<String> arguments) async {
   var control = Controller();
-  control.start();
+  control.start(); //Starts Game Session
+  //Use:"https://cssrvlab01.utep.edu/Classes/cs3360/laescapita/c4service/src";
 }
